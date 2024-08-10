@@ -11,8 +11,12 @@
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
 	"require": {
-		"php": "^7.2.5|^8.1|8*",
-		"yidas/codeigniter-model": "^2.19",
+		"php": "^7.2.5|8.*",
+		"illuminate/database": "^8",
+		"illuminate/events": "^8",
+		"illuminate/contracts": "^8",
+		"illuminate/pagination": "^8",
+		"illuminate/support": "^8",
 		"phpmailer/phpmailer": "^6.1",
 		"vlucas/phpdotenv": "^5.5"
 	},
@@ -34,5 +38,12 @@
 	"require-dev": {
 		"mikey179/vfsstream": "1.6.*",
 		"phpunit/phpunit": "4.* || 5.* || 9.*"
+	},
+	"autoload": {
+		"psr-4": {
+		  "Src\\": "src",
+		  "Core\\": "src/core/",
+		  "Models\\": "src/models/"
+		}
 	}
 }
