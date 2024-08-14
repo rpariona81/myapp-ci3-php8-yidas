@@ -21,7 +21,8 @@ class Welcome extends CI_Controller
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		//$this->load->view('welcome_message');
+		$this->load->view(getenv('TEMPLATE_THEME').'/home_view');
 	}
 
 	public function yidas()
