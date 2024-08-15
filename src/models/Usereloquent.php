@@ -204,4 +204,73 @@ class UserEloquent extends My_Model
 	{
 		return UserEloquent::where('role_id', 4)->where('status', 1)->count();
 	}
+
+	/**
+	 * Valida acceso del login
+	 *
+	 * @param string $user
+	 * @param string $pass
+	 * @return User|Boolean
+	 */
+	public static function getLogin($user, $pass)
+	{
+		$userValidate = User_Eloquent::where('username', '=', $user)->first();
+		if (is_null($userValidate)) {
+			$arrayLogin = array(
+				'error' => 'Usuario no registrado.',
+				'isLogged' => FALSE,
+			);
+			return $arrayLogin;
+		} else {
+			if ($userValidate->status) {
+				if (password_verify($pass, $userValidate['password'])) {
+					$role_user = RoleUser_Eloquent::where('user_id',  $userValidate['id'])->first();
+					//print_r($role_user);
+					$role = Role_Eloquent::findOrFail($role_user['role_id']);
+					if ($role) {
+						if ($role->status) {
+							$arrayLogin = array(
+								'user_login' => $userValidate['username'],
+								'user_nickname' => $userValidate['display_name'],
+								'user_email' => $userValidate['email'],
+								'user_id' => $userValidate['id'],
+								'user_role' => $role['rolename'],
+								'user_guard' => $role['guard_name'],
+								'user_role_id' => $role['id'],
+								'user_level' => $userValidate['user_type'],
+								'isLogged' => TRUE,
+							);
+							//print_r($arrayLogin);
+							return $arrayLogin;
+						} else {
+							$arrayLogin = array(
+								'error' => 'Usuario no tiene rol autorizado',
+								'isLogged' => FALSE,
+							);
+							return $arrayLogin;
+						}
+					} else {
+						$arrayLogin = array(
+							'error' => 'No tiene rol asignado',
+							'isLogged' => FALSE,
+						);
+						return $arrayLogin;
+					}
+				} else {
+					$arrayLogin = array(
+						'error' => 'Error de contraseña',
+						'isLogged' => FALSE,
+					);
+					return $arrayLogin;
+				}
+			} else {
+				$arrayLogin = array(
+					'error' => 'Usuario no autorizado.',
+					'isLogged' => FALSE,
+				);
+				return $arrayLogin;
+			}
+			return;
+		}
+	}
 }

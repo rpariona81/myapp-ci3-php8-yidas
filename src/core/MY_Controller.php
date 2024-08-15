@@ -3,12 +3,40 @@
 class MY_Controller extends CI_Controller
 {
 	//https://avenir.ro/codeigniter-tutorials/creating-using-page-templates-codeigniter/
-	protected $data = array();
+	protected $global = array();
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->data['title'] = getenv('APP_NAME');
+		$this->global['title'] = getenv('APP_NAME');
+	}
+
+	/**
+	 * This function used to check the user is logged in or not
+	 */
+	function isLoggedIn() {
+		$isLoggedIn = $this->session->userdata ( 'isLogged' );
+		
+		if (! isset ( $isLoggedIn ) || $isLoggedIn != TRUE) {
+			redirect ( 'login' );
+		} else {
+			$this->role = $this->session->userdata ( 'role' );
+			$this->vendorId = $this->session->userdata ( 'userId' );
+			$this->name = $this->session->userdata ( 'name' );
+			$this->roleText = $this->session->userdata ( 'roleText' );
+			$this->lastLogin = $this->session->userdata ( 'lastLogin' );
+			$this->isAdmin = $this->session->userdata ( 'isAdmin' );
+			$this->accessInfo = $this->session->userdata ( 'accessInfo' );
+			
+			$this->global ['name'] = $this->name;
+			$this->global ['role'] = $this->role;
+			$this->global ['role_text'] = $this->roleText;
+			$this->global ['last_login'] = $this->lastLogin;
+			$this->global ['is_admin'] = $this->isAdmin;
+			$this->global ['access_info'] = $this->accessInfo;
+
+			print_r($this->global);
+		}
 	}
 
 	//protected function render($the_view = NULL, $template = 'admin')

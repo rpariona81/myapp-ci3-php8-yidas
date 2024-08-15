@@ -9,23 +9,23 @@
     <meta name="author" content="" />
     <title><?= getenv('APP_NAME') ?></title>
 
-    <link rel="stylesheet" href="<?= base_url('public/css/bootstrap.min.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('dist/font-awesome/4.7.0/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url(getenv('PUBLIC_THEME') . '/public/css/bootstrap.min.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url(getenv('PUBLIC_THEME') . '/dist/font-awesome/4.7.0/css/font-awesome.min.css') ?>">
 
-    <script src="<?= base_url('public/js/jquery-3.7.0.min.js') ?>"></script>
-    <script src="<?= base_url('public/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url(getenv('PUBLIC_THEME') . '/public/js/jquery-3.7.0.min.js') ?>"></script>
+    <script src="<?= base_url(getenv('PUBLIC_THEME') . '/public/js/bootstrap.bundle.min.js') ?>"></script>
 
 </head>
 
-<body class="bg-info">
+<body class="bg-light">
     <div class="container position-sticky z-index-sticky top-0">
         <div class="container">
             <div class="login-logo text-center mt-5">
-                <img class="img login-logo" src="<?= base_url('dist/img/avatars/10logo-oficial.png') ?>" height="250" width="220" />
+                <img class="img login-logo" src="<?= base_url(getenv('PUBLIC_THEME') . '/dist/img/avatars/10logo-oficial.png') ?>" height="250" width="220" />
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6 col-xl-5 mb-5">
-                    <div class="card shadow-lg border-0 rounded-lg mt-4">
+                    <div class="card shadow-lg border-1 rounded-lg mt-4">
                         <!--<div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>-->
                         <div class="card-header text-center">
                             <h3>Bienvenido(a)</h3>
@@ -57,7 +57,7 @@
 
                                 <?php endif ?>
 
-                                <?= form_open('authcontroller/loginAdmin') ?>
+                                <?= form_open('auth/login/validate_login') ?>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="username" name="username" type="text" placeholder="Usuario" value="<?= set_value('username') ?>" size="50" required />
                                 </div>
