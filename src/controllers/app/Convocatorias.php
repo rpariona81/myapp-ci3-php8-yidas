@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Index extends CI_Controller
+class Convocatorias extends CI_Controller
 {
 
 
@@ -29,7 +29,7 @@ class Index extends CI_Controller
             $data = [];
             //$data['rol'] = $this->session->userdata('user_rol');
             //$data['pagina'] = 'app/listConvocatorias';
-            $data['pagina'] = getenv('TEMPLATE_THEME').'/app/panel_view';
+            $data['pagina'] = getenv('TEMPLATE_THEME').'/app/convocatorias_view';
             if ($this->session->userdata('user_rol') == 'estudiante') {
                 $data['recuento'] = Offerjobeloquent::getTotOffersjobsByVigency($this->session->userdata('user_carrera_id'));
                 $data['queryVigentes'] = Offerjobeloquent::getOffersjobsVigentes($this->session->userdata('user_carrera_id'));

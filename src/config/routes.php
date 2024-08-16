@@ -53,8 +53,17 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
+//AUTH
 $route['login'] = 'auth/Login/index';
+$route['logout'] = 'auth/Login/logout';
 
 
+//APP
+//$route['users'] = 'app/Index/index';
 $route['users'] = 'app/Index/index';
+
+$route['users/convocatorias'] = 'app/Convocatorias/index';
+
+$route['users/postulaciones'] = 'app/Postulaciones/index';
+
+$route['users/perfil'] = 'app/Perfil/index';
